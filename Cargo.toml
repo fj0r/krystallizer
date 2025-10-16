@@ -1,0 +1,9 @@
+[package]
+name = "krystallizer"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+rig-core = "0.22.0"
+rig-surrealdb = "0.1.19"
+surrealdb = "2.3.10"
