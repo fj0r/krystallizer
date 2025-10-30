@@ -1,0 +1,10 @@
+[provider.qwen]
+name = "qwen"
+baseurl = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+default_model = "qwen3-coder-480b-a35b-instruct"
+api_key = ''
+
+[model.qwen3]
+provider = "qwen"
+adapter = 'OpenAI'
+name = "qwen3-coder-480b-a35b-instruct"
