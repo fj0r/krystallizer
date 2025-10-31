@@ -1920,6 +1920,7 @@ dependencies = [
  "anyhow",
  "figment",
  "indexmap 2.12.0",
+ "reqwest",
  "rig-core",
  "rig-surrealdb",
  "serde",

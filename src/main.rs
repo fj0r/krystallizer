@@ -1,12 +1,8 @@
-mod libs;
-use anyhow::{Result, bail};
-use libs::config::Config;
-use rig::{providers::openai, completion::Prompt};
+extern crate krystallizer;
+use anyhow::Result;
+use krystallizer::run;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let config = Config::new()?;
-
-    println!("Hello, world! {:?}", config);
-    Ok(())
+    run().await
 }

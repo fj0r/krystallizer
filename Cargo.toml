@@ -7,8 +7,17 @@ edition = "2024"
 anyhow = "1.0.100"
 figment = { version = "0.10.19", features = ["toml", "env"] }
 indexmap = { version = "2.12.0", features = ["serde"] }
+reqwest = { version = "0.12.24", features = ["json"] }
 rig-core = "0.22.0"
 rig-surrealdb = "0.1.19"
 serde = "1.0.228"
 surrealdb = "2.3.10"
 tokio = "1.48.0"
+
+[lib]
+name = "krystallizer"
+path = "src/libs/mod.rs"
+
+[[bin]]
+name = "krystallizer"
+path = "src/main.rs"

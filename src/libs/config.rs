@@ -5,7 +5,7 @@ use figment::{
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone, Default)]
 pub struct Provider {
     pub name: String,
     pub baseurl: String,
