@@ -2073,6 +2073,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "figment",
+ "futures",
  "indexmap 2.12.0",
  "llm",
  "reqwest",
