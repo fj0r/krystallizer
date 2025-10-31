@@ -55,7 +55,7 @@ impl Config {
     pub fn new() -> Result<Self> {
         Figment::new()
             .merge(Toml::file("agent.toml"))
-            .merge(Env::prefixed("AGENT_").split("_"))
+            .merge(Env::prefixed("AGENT__").split("__"))
             .extract()
     }
 }
