@@ -2078,6 +2078,7 @@ dependencies = [
  "llm",
  "reqwest",
  "serde",
+ "serde_json",
  "surrealdb",
  "tokio",
 ]
