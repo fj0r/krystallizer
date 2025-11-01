@@ -4,3 +4,8 @@ export def --env init [] {
     }
     | load-env
 }
+
+export def run [] {
+    init
+    cargo run
+}

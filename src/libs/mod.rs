@@ -11,30 +11,22 @@ use std::io::{self, Write};
 pub async fn run() -> Result<()> {
     let config = Config::new()?;
 
-    let provider = config.provider.get("qwen").context("no found")?;
+    let model = config.get_model("qwen3").context("model does not exist")?;
+
+    dbg!(&model);
 
     let llm = LLMBuilder::new()
         .backend(LLMBackend::OpenAI)
-        .base_url(&provider.baseurl)
-        .api_key(&provider.api_key)
-        .model(&provider.default_model)
-        .max_tokens(512)
-        .temperature(0.7)
+        .base_url(&model.provider.baseurl)
+        .api_key(&model.provider.api_key)
+        .model(&model.name)
+        .max_tokens(model.max_token)
+        .temperature(model.temperature)
         .build()
         .expect("Failed to build LLM (OpenAI)");
 
     // Prepare conversation history with example messages
-    let messages = vec![
-        ChatMessage::user()
-            .content("Tell me that you love cats")
-            .build(),
-        ChatMessage::assistant()
-            .content("I am an assistant, I cannot love cats but I can love dogs")
-            .build(),
-        ChatMessage::user()
-            .content("Tell me that you love dogs in 2000 chars")
-            .build(),
-    ];
+    let messages = vec![ChatMessage::user().content("who are you?").build()];
 
     // Send chat request and handle the response
     match llm.chat_stream(&messages).await {
