@@ -9,7 +9,7 @@ export def --env init [] {
 
 export def run [] {
     init
-    cargo run
+    cargo run --bin krystallizer
 }
 
 export def 'surrealdb up' [] {

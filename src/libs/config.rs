@@ -82,14 +82,14 @@ fn default_name() -> String {
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct SurrealConfig {
     #[serde(default = "default_localhost")]
-    host: String,
-    port: String,
+    pub host: String,
+    pub port: String,
     #[serde(default = "default_name")]
-    ns: String,
+    pub ns: String,
     #[serde(default = "default_name")]
-    db: String,
-    user: String,
-    pass: String,
+    pub db: String,
+    pub user: String,
+    pub pass: String,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]

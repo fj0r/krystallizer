@@ -22,3 +22,7 @@ path = "src/libs/mod.rs"
 [[bin]]
 name = "krystallizer"
 path = "src/main.rs"
+
+[[bin]]
+name = "init"
+path = "src/init"

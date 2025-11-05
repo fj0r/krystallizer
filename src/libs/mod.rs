@@ -1,5 +1,7 @@
 pub mod config;
 use crate::config::Config;
+pub mod db;
+
 use anyhow::{Context, Result};
 use futures::StreamExt;
 use llm::{
@@ -13,7 +15,8 @@ use std::io::{self, Write};
 pub async fn run() -> Result<()> {
     let config = Config::new()?;
 
-    let db = &config.database.surreal;
+    let db = &config.database.surreal.conn().await;
+
     dbg!(db);
 
     let model = config.get_model("qwen3").context("model does not exist")?;
