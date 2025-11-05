@@ -13,6 +13,9 @@ use std::io::{self, Write};
 pub async fn run() -> Result<()> {
     let config = Config::new()?;
 
+    let db = &config.database.surreal;
+    dbg!(db);
+
     let model = config.get_model("qwen3").context("model does not exist")?;
 
     dbg!(&model);

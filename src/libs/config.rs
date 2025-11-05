@@ -72,10 +72,36 @@ pub struct Model {
     pub max_token: u32,
 }
 
+fn default_localhost() -> String {
+    "localhost".to_string()
+}
+fn default_name() -> String {
+    "default".to_string()
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct SurrealConfig {
+    #[serde(default = "default_localhost")]
+    host: String,
+    port: String,
+    #[serde(default = "default_name")]
+    ns: String,
+    #[serde(default = "default_name")]
+    db: String,
+    user: String,
+    pass: String,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct Database {
+    pub surreal: SurrealConfig,
+}
+
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Config {
     pub model: IndexMap<String, Model>,
     pub provider: IndexMap<String, Provider>,
+    pub database: Database,
 }
 
 impl Config {

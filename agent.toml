@@ -8,3 +8,8 @@ api_key = ''
 provider = { name = "qwen" }
 adapter = 'OpenAI'
 name = "qwen3-coder-480b-a35b-instruct"
+
+[database.surreal]
+port = "8000"
+user = "admin"
+pass = "admin"
