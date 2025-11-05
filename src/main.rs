@@ -1,4 +1,3 @@
-extern crate krystallizer;
 use anyhow::Result;
 use krystallizer::run;
 

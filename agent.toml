@@ -13,3 +13,6 @@ name = "qwen3-coder-480b-a35b-instruct"
 port = "8000"
 user = "admin"
 pass = "admin"
+
+[database.surreal.migration]
+path = "data/migration"

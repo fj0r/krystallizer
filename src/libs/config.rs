@@ -1,11 +1,10 @@
-use std::ops::Deref;
-
 use figment::{
     Figment, Result,
     providers::{Env, Format, Toml},
 };
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
+use std::ops::Deref;
 
 #[derive(Debug, Serialize, Deserialize, Clone, Default)]
 pub struct Provider {
@@ -72,24 +71,33 @@ pub struct Model {
     pub max_token: u32,
 }
 
-fn default_localhost() -> String {
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct SurrealMigration {
+    pub path: String,
+}
+
+fn const_localhost() -> String {
     "localhost".to_string()
 }
-fn default_name() -> String {
+fn const_default() -> String {
     "default".to_string()
+}
+fn const_public() -> String {
+    "public".to_string()
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct SurrealConfig {
-    #[serde(default = "default_localhost")]
+    #[serde(default = "const_localhost")]
     pub host: String,
     pub port: String,
-    #[serde(default = "default_name")]
+    #[serde(default = "const_default")]
     pub ns: String,
-    #[serde(default = "default_name")]
+    #[serde(default = "const_public")]
     pub db: String,
     pub user: String,
     pub pass: String,
+    pub migration: SurrealMigration,
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]

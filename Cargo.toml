@@ -25,4 +25,4 @@ path = "src/main.rs"
 
 [[bin]]
 name = "init"
-path = "src/init"
+path = "src/init.rs"

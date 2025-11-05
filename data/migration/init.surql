@@ -1,0 +1,2 @@
+# hello
+select 'hello';
