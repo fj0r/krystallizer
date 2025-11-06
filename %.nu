@@ -1,6 +1,6 @@
 const CFG = path self agent.toml
 
-export def --env init [] {
+export def --env setup [] {
     {
         AGENT__PROVIDER__QWEN__API_KEY: (asn --all | get api_key)
     }
@@ -8,8 +8,13 @@ export def --env init [] {
 }
 
 export def run [] {
-    init
+    setup
     cargo run --bin krystallizer
+}
+
+export def init [] {
+    setup
+    cargo run --bin init
 }
 
 export def 'surrealdb up' [] {
