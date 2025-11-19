@@ -1,5 +1,5 @@
 use anyhow::Result;
-use krystallizer::{config::Config, run};
+use core::{config::Config, run};
 use std::fs::{read_dir, read_to_string};
 
 #[tokio::main]

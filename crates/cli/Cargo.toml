@@ -1,0 +1,17 @@
+[package]
+name = "cli"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tokio = "1.48.0"
+anyhow = "1.0.100"
+core = { path = "../core" }
+
+[[bin]]
+name = "krystallizer"
+path = "src/main.rs"
+
+[[bin]]
+name = "init"
+path = "src/init.rs"

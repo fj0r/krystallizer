@@ -1,5 +1,5 @@
 [package]
-name = "krystallizer"
+name = "core"
 version = "0.1.0"
 edition = "2024"
 
@@ -16,13 +16,5 @@ surrealdb = "2.3.10"
 tokio = "1.48.0"
 
 [lib]
-name = "krystallizer"
-path = "src/libs/mod.rs"
-
-[[bin]]
 name = "core"
-path = "src/main.rs"
-
-[[bin]]
-name = "init"
-path = "src/init.rs"
+path = "src/libs/mod.rs"

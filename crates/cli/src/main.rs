@@ -1,5 +1,5 @@
 use anyhow::Result;
-use krystallizer::run;
+use core::run;
 
 #[tokio::main]
 async fn main() -> Result<()> {
