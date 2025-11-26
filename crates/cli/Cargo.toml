@@ -4,8 +4,8 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-tokio = "1.48.0"
-anyhow = "1.0.100"
+tokio = { workspace = true }
+anyhow = { workspace = true }
 core = { path = "../core" }
 
 [[bin]]
