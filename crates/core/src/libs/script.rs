@@ -2,7 +2,7 @@ use rune::termcolor::{ColorChoice, StandardStream};
 use rune::{Context, Diagnostics, Source, Sources, Vm};
 use std::sync::Arc;
 
-pub fn run_script() -> rune::support::Result<()> {
+fn create_vm() -> rune::support::Result<Vm> {
     let context = Context::with_default_modules()?;
     let ctx = Arc::new(Context::runtime(&context)?);
 
@@ -22,8 +22,12 @@ pub fn run_script() -> rune::support::Result<()> {
     }
 
     let unit = result?;
-    let mut vm = Vm::new(ctx, unit.into());
+    let vm = Vm::new(ctx, unit.into());
+    Ok(vm)
+}
 
+pub fn run_script() -> rune::support::Result<()> {
+    let mut vm = create_vm()?;
     let output = vm.call(["add"], (10i64, 23i64))?;
     let output: i64 = rune::from_value(output)?;
 
