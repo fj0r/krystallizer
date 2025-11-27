@@ -1,4 +1,5 @@
 use crate::config::Config;
+use crate::script::run_script;
 use anyhow::{Context, Result};
 use futures::StreamExt;
 use llm::{
@@ -11,6 +12,7 @@ use std::io::{self, Write};
 
 pub async fn run() -> Result<()> {
     let config = Config::new()?;
+    run_script()?;
 
     let db = &config.database.surreal.conn().await;
 
