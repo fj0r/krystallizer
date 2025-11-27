@@ -1,13 +1,16 @@
 use rune::termcolor::{ColorChoice, StandardStream};
 use rune::{Context, Diagnostics, Source, Sources, Vm};
+use std::path::Path;
 use std::sync::Arc;
 
-fn create_vm() -> rune::support::Result<Vm> {
+fn create_vm(paths: Vec<impl AsRef<Path>>) -> rune::support::Result<Vm> {
     let context = Context::with_default_modules()?;
     let ctx = Arc::new(Context::runtime(&context)?);
 
     let mut sources = Sources::new();
-    let _ = sources.insert(Source::memory("pub fn add(a, b) { a + b }")?);
+    for p in paths {
+        let _ = sources.insert(Source::from_path(p)?);
+    }
 
     let mut diagnostics = Diagnostics::new();
 
@@ -27,7 +30,7 @@ fn create_vm() -> rune::support::Result<Vm> {
 }
 
 pub fn run_script() -> rune::support::Result<()> {
-    let mut vm = create_vm()?;
+    let mut vm = create_vm(vec!["scripts/add.rn"])?;
     let output = vm.call(["add"], (10i64, 23i64))?;
     let output: i64 = rune::from_value(output)?;
 
