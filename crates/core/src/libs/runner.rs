@@ -1,4 +1,6 @@
 use crate::config::Config;
+#[cfg(feature = "koto")]
+use crate::koto::run_koto;
 #[cfg(feature = "script")]
 use crate::script::run_script;
 #[cfg(feature = "steel")]
@@ -27,6 +29,9 @@ pub async fn run() -> Result<()> {
 
     #[cfg(feature = "steel")]
     run_steel();
+
+    #[cfg(feature = "koto")]
+    run_koto();
 
     let db = &config.database.surreal.conn().await;
 

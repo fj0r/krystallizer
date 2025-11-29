@@ -1,5 +1,7 @@
 pub mod config;
 pub mod db;
+#[cfg(feature = "koto")]
+pub mod koto;
 pub mod runner;
 #[cfg(feature = "script")]
 pub mod script;
