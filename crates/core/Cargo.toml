@@ -18,10 +18,13 @@ rmcp = "0.9.1"
 surrealdb = "2.4.0"
 rune = { workspace = true, optional = true }
 minijinja = { workspace = true }
-wasmtime = { workspace = true, features = ["std"] }
+wasmtime = { workspace = true, optional = true }
+steel-core = { workspace = true, optional = true }
 
 [features]
 script = ["dep:rune"]
+wasmtime = ["dep:wasmtime"]
+steel = ["dep:steel-core"]
 
 [lib]
 name = "core"

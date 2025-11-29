@@ -3,5 +3,8 @@ pub mod db;
 pub mod runner;
 #[cfg(feature = "script")]
 pub mod script;
+#[cfg(feature = "steel")]
+pub mod steel;
+#[cfg(feature = "wasmtime")]
 pub mod wasm;
 pub use runner::run;
