@@ -12,6 +12,7 @@ use std::io::{self, Write};
 
 pub async fn run() -> Result<()> {
     let config = Config::new()?;
+    dbg!(&config);
     run_script()?;
 
     let db = &config.database.surreal.conn().await;

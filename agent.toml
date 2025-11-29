@@ -17,64 +17,64 @@ pass = "admin"
 [database.surreal.migration]
 path = "data/migration"
 
-[sessions.window]
+[session.window]
 size = 10
 
-[prompts.attributes]
-en = "Extract the following attributes—no explanations, only results (use values between 0 and 1 unless otherwise specified)"
-zh = "提取以下内容，不要解释，直接给出结果(无特殊要求时取0到1的小数)"
+[catalog.attribute.prompt.en]
+val = "Extract the following attributes—no explanations, only results (use values between 0 and 1 unless otherwise specified)"
+[catalog.attribute.prompt.zh]
+val = "提取以下内容，不要解释，直接给出结果(无特殊要求时取0到1的小数)"
+[catalog.attribute.entries.halflife]
+en = { val = "half-life", remark = "in years, capped at 100" }
+zh = { val = "半衰期", remark = "以年为单位，最大100" }
+[catalog.attribute.entries.timeliness]
+en = { val = "timeliness" }
+zh = { val = "时效性" }
+[catalog.attribute.entries.confidence]
+en = { val = "confidence" }
+zh = { val = "置信度" }
+[catalog.attribute.entries.authority]
+en = { val = "authority" }
+zh = { val = "权威性" }
+[catalog.attribute.entries.objectivity]
+en = { val = "objectivity" }
+zh = { val = "客观性" }
+[catalog.attribute.entries.completeness]
+en = { val = "completeness" }
+zh = { val = "完整性" }
+[catalog.attribute.entries.verifiability]
+en = { val = "verifiability" }
+zh = { val = "可验证性" }
+[catalog.attribute.entries.utility]
+en = { val = "utility" }
+zh = { val = "实用性" }
+[catalog.attribute.entries.consistency]
+en = { val = "consistency", remark = "consider user profile" }
+zh = { val = "一致性", remark = "结合用户档案" }
+[catalog.attribute.entries.importance]
+en = { val = "importance", remark = "consider user profile" }
+zh = { val = "重要性", remark = "结合用户档案" }
+[catalog.attribute.entries.expression]
+en = { val = "expression", remark = "a composite score reflecting conciseness, clarity, rigor, style, and tone" }
+zh = { val = "表达", remark = "综合简洁，清晰，严谨，风格，格调等因素" }
+[catalog.attribute.entries.novelty]
+en = { val = "novelty" }
+zh = { val = "新颖性" }
+[catalog.attribute.entries.unexpectedness]
+en = { val = "unexpectedness" }
+zh = { val = "意外度" }
+[catalog.attribute.entries.categories]
+en = { val = "categories", remark = "atomic tag set" }
+zh = { val = "分类", remark = "原子化标签组" }
+[catalog.attribute.entries.topics]
+en = { val = "topics", remark = "atomic tag set" }
+zh = { val = "主题", remark = "原子化标签组" }
+[catalog.attribute.entries.summary]
+en = { val = "summary" }
+zh = { val = "摘要", remark = "尽可能短" }
 
-[attributes.halflife]
-en = { name = "half-life", remark = "in years, capped at 100" }
-zh = { name = "半衰期", remark = "以年为单位，最大100" }
-[attributes.timeliness]
-en= { name = "timeliness" }
-zh = { name = "时效性" }
-[attributes.confidence]
-en= { name = "confidence" }
-zh = { name = "置信度" }
-[attributes.authority]
-en= { name = "authority" }
-zh = { name = "权威性" }
-[attributes.objectivity]
-en= { name = "objectivity" }
-zh = { name = "客观性" }
-[attributes.completeness]
-en= { name = "completeness" }
-zh = { name = "完整性" }
-[attributes.verifiability]
-en= { name = "verifiability" }
-zh = { name = "可验证性" }
-[attributes.utility]
-en= { name = "utility" }
-zh = { name = "实用性" }
-[attributes.consistency]
-en= { name = "consistency", remark = "consider user profile" }
-zh = { name = "一致性", remark = "结合用户档案" }
-[attributes.importance]
-en= { name = "importance", remark = "consider user profile" }
-zh = { name = "重要性", remark = "结合用户档案" }
-[attributes.expression]
-en= { name = "expression", remark = "a composite score reflecting conciseness, clarity, rigor, style, and tone" }
-zh = { name = "表达", remark = "综合简洁，清晰，严谨，风格，格调等因素" }
-[attributes.novelty]
-en= { name = "novelty" }
-zh = { name = "新颖性" }
-[attributes.unexpectedness]
-en= { name = "unexpectedness" }
-zh = { name = "意外度" }
-[attributes.categories]
-en= { name = "categories", remark = "atomic tag set" }
-zh = { name = "分类", remark = "原子化标签组" }
-[attributes.topics]
-en= { name = "topics", remark = "atomic tag set" }
-zh = { name = "主题", remark = "原子化标签组" }
-[attributes.summary]
-en= { name = "summary" }
-zh = { name = "摘要", remark = "尽可能短" }
-
-[prompts.profiles]
-en = """
+[catalog.profile.prompt.en]
+val = """
 You are a high-precision, multi-dimensional user profiling engine, responsible for carefully and smoothly updating a user’s digital identity profile based on their latest input. The profile consists of the following seven dimensions: **Preference**, **Interest**, **Skill**, **Value**, **Cognitive Style**, **Knowledge Domain**, and **Communication Style**.
 
 Please strictly adhere to the following rules:
@@ -117,7 +117,8 @@ Cognitive Style:
 - Do **not invent** dimensions or tags not implied by the input
 - Tag names must **exactly match** those in the input
 """
-zh = """
+[catalog.profile.prompt.zh]
+val = """
 你是一个高精度多维用户画像引擎，负责根据用户的最新输入，谨慎、平滑地更新其数字身份档案。档案包含以下七个维度：偏好、兴趣、技能、价值观、认知风格、知识领域、沟通风格。
 
 请严格遵守以下规则：
@@ -160,25 +161,24 @@ zh = """
 - 不得虚构未暗示的维度或标签
 - 键名与输入一致
 """
-remark = ""
-[profiles.preference]
-en = { name = "preference", remark = "attitude toward specific entities or policies (e.g., Huawei, open source, war)" }
-zh = { name = "偏好", remark = "对具体实体/政策的态度（如 华为、开源、战争）" }
-[profiles.interest]
-en = { name = "interest", remark = "topics of curiosity or desire to learn (e.g., mathematics, history of technology)" }
-zh = { name = "兴趣", remark = "想了解的主题（如 数学、技术史）" }
-[profiles.skill]
-en = { name = "skill", remark = "hands-on practical abilities (e.g., Rust, debugging)" }
-zh = { name = "技能", remark = "能动手实践的能力（如 Rust、调试）" }
-[profiles.value]
-en = { name = "value", remark = "deeply held beliefs (e.g., openness, fairness, rigor)" }
-zh = { name = "价值观", remark = "深层信念（如 开放、公平、严谨）" }
-[profiles.cognitive_style]
-en = { name = "cognitive style", remark = "thinking patterns (e.g., abstract, systematic, intuitive)" }
-zh = { name = "认知风格", remark = "思维模式（如 抽象、系统性、直觉）" }
-[profiles.knowledge_domain]
-en = { name = "knowledge domain", remark = "areas of mastered knowledge (e.g., type theory, operating systems)" }
-zh = { name = "知识领域", remark = "已掌握的知识（如 类型理论、操作系统）" }
-[profiles.communication_style]
-en = { name = "communication style", remark = "preferences in expression and reception (e.g., likes quoting sources, prefers definitions, concise)" }
-zh = { name = "沟通风格", remark = "表达/接收偏好（如 喜欢引用、偏好定义、简洁）" }
+[catalog.profile.entries.preference]
+en = { val = "preference", remark = "attitude toward specific entities or policies (e.g., Huawei, open source, war)" }
+zh = { val = "偏好", remark = "对具体实体/政策的态度（如 华为、开源、战争）" }
+[catalog.profile.entries.interest]
+en = { val = "interest", remark = "topics of curiosity or desire to learn (e.g., mathematics, history of technology)" }
+zh = { val = "兴趣", remark = "想了解的主题（如 数学、技术史）" }
+[catalog.profile.entries.skill]
+en = { val = "skill", remark = "hands-on practical abilities (e.g., Rust, debugging)" }
+zh = { val = "技能", remark = "能动手实践的能力（如 Rust、调试）" }
+[catalog.profile.entries.value]
+en = { val = "value", remark = "deeply held beliefs (e.g., openness, fairness, rigor)" }
+zh = { val = "价值观", remark = "深层信念（如 开放、公平、严谨）" }
+[catalog.profile.entries.cognitive_style]
+en = { val = "cognitive style", remark = "thinking patterns (e.g., abstract, systematic, intuitive)" }
+zh = { val = "认知风格", remark = "思维模式（如 抽象、系统性、直觉）" }
+[catalog.profile.entries.knowledge_domain]
+en = { val = "knowledge domain", remark = "areas of mastered knowledge (e.g., type theory, operating systems)" }
+zh = { val = "知识领域", remark = "已掌握的知识（如 类型理论、操作系统）" }
+[catalog.profile.entries.communication_style]
+en = { val = "communication style", remark = "preferences in expression and reception (e.g., likes quoting sources, prefers definitions, concise)" }
+zh = { val = "沟通风格", remark = "表达/接收偏好（如 喜欢引用、偏好定义、简洁）" }
