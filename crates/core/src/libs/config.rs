@@ -55,16 +55,23 @@ fn default_max_token() -> u32 {
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct Capabilities {
+    #[serde(default = "default_bool_true")]
+    pub function: bool,
+    #[serde(default = "default_bool_true")]
+    pub json: bool,
+    #[serde(default = "default_bool_false")]
+    pub search: bool,
+    #[serde(default = "default_bool_false")]
+    pub thinking: bool,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Model {
     pub provider: ProviderRef,
     pub adapter: Adapter,
     pub name: String,
-    #[serde(default = "default_bool_true")]
-    pub has_fn: bool,
-    #[serde(default = "default_bool_false")]
-    pub has_search: bool,
-    #[serde(default = "default_bool_false")]
-    pub has_thinking: bool,
+    pub capabilities: Capabilities,
     #[serde(default = "default_temperature")]
     pub temperature: f32,
     #[serde(default = "default_max_token")]

@@ -8,6 +8,7 @@ api_key = ''
 provider = { name = "qwen" }
 adapter = 'OpenAI'
 name = "qwen3-coder-480b-a35b-instruct"
+[model.qwen3.capabilities]
 
 [database.surreal]
 port = "8000"
@@ -20,10 +21,31 @@ path = "data/migration"
 [session.window]
 size = 10
 
+[session.prompt.en]
+val = """
+## Profile
+{{ profile }}
+## References
+{{ history }}
+"""
+[session.prompt.zh]
+val = """
+## 用户档案
+{{ profile }}
+## 参考信息
+{{ history }}
+"""
+
 [catalog.attribute.prompt.en]
-val = "Extract the following attributes—no explanations, only results (use values between 0 and 1 unless otherwise specified)"
+val = """
+Extract the following attributes—no explanations, only results (use values between 0 and 1 unless otherwise specified)
+{{ entries }}
+"""
 [catalog.attribute.prompt.zh]
-val = "提取以下内容，不要解释，直接给出结果(无特殊要求时取0到1的小数)"
+val = """
+提取以下内容，不要解释，直接给出结果(无特殊要求时取0到1的小数)
+{{ entries }}
+"""
 [catalog.attribute.entries.halflife]
 en = { val = "half-life", remark = "in years, capped at 100" }
 zh = { val = "半衰期", remark = "以年为单位，最大100" }
@@ -98,7 +120,7 @@ Identify signals from the user's input and apply small, reasonable, anti-oscilla
    If a score is ≥ 0.85 or ≤ 0.15, and the new input does not provide stronger contradictory evidence, **do not reverse-adjust** it.
 
 ### Dimension Definitions & Recognition Guidelines
-{{ profiles }}
+{{ entries }}
 > Note: Distinguish **Interest** (wants to learn) vs. **Knowledge Domain** (already knows); **Value** (why) vs. **Preference** (toward what).
 
 ### Input Format
@@ -142,7 +164,7 @@ val = """
    若某项 ≥ 0.85 或 ≤ 0.15，且新输入未提供更强证据，则不反向调整。
 
 ### 维度定义与识别指引
-{{ profiles }}
+{{ entries }}
 > 注意：区分“兴趣”（想学） vs “知识领域”（已懂）；“价值观”（为什么） vs “偏好”（对什么）
 
 ### 输入格式
