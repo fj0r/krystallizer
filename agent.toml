@@ -17,6 +17,9 @@ pass = "admin"
 [database.surreal.migration]
 path = "data/migration"
 
+[sessions.window]
+size = 10
+
 [prompts.attributes]
 en = "Extract the following attributes—no explanations, only results (use values between 0 and 1 unless otherwise specified)"
 zh = "提取以下内容，不要解释，直接给出结果(无特殊要求时取0到1的小数)"
