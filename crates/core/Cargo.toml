@@ -18,6 +18,7 @@ rmcp = "0.9.1"
 surrealdb = "2.4.0"
 rune = { workspace = true, optional = true }
 minijinja = { workspace = true }
+wasmtime = { workspace = true, features = ["std"] }
 
 [features]
 script = ["dep:rune"]

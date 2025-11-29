@@ -1,6 +1,5 @@
 use crate::config::Config;
-#[cfg(feature = "script")]
-use crate::script::run_script;
+use crate::wasm::run_wasm;
 use anyhow::{Context, Result};
 use futures::StreamExt;
 use llm::{
@@ -15,8 +14,7 @@ pub async fn run() -> Result<()> {
     let config = Config::new()?;
     dbg!(&config);
 
-    #[cfg(feature = "script")]
-    run_script()?;
+    run_wasm();
 
     let db = &config.database.surreal.conn().await;
 
