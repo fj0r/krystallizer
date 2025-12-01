@@ -166,3 +166,4 @@ fn process_tool_call(tool_call: &ToolCall) -> Result<serde_json::Value> {
         })),
     }
 }
+

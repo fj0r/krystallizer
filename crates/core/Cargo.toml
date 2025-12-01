@@ -23,7 +23,7 @@ steel-core = { workspace = true, optional = true }
 koto = { workspace = true, optional = true }
 
 [features]
-script = ["dep:rune"]
+rune = ["dep:rune"]
 wasmtime = ["dep:wasmtime"]
 steel = ["dep:steel-core"]
 koto = ["dep:koto"]
