@@ -1,7 +1,7 @@
 use crate::config::Config;
 #[cfg(feature = "koto")]
 use crate::koto::run_koto;
-#[cfg(feature = "script")]
+#[cfg(feature = "rune")]
 use crate::script::run_script;
 #[cfg(feature = "steel")]
 use crate::steel::run_steel;
@@ -24,7 +24,7 @@ pub async fn run() -> Result<()> {
     #[cfg(feature = "wasmtime")]
     run_wasm();
 
-    #[cfg(feature = "script")]
+    #[cfg(feature = "rune")]
     run_script();
 
     #[cfg(feature = "steel")]
@@ -166,4 +166,3 @@ fn process_tool_call(tool_call: &ToolCall) -> Result<serde_json::Value> {
         })),
     }
 }
-
