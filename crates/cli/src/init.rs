@@ -1,12 +1,12 @@
 use anyhow::Result;
-use core::{config::Config, run};
+use core::config::Config;
 use std::fs::{read_dir, read_to_string};
 
 #[tokio::main]
 async fn main() -> Result<()> {
     let config = Config::new()?;
     dbg!(&config.database.surreal);
-    let db = config.database.surreal.conn().await;
+    let db = config.database.surreal.conn().await?;
     for entry in read_dir(config.database.surreal.migration.path)? {
         let path = entry?.path();
         let content = read_to_string(path)?;
