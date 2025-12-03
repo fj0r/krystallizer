@@ -31,7 +31,12 @@ export def 'surreal up' [] {
         -p $cfg.pass
         $"rocksdb://($data)"
     ]
-    surreal2 ...$args
+    surreal3 ...$args
+}
+
+export def sql [] {
+    let cfg = open $CFG | get database.surreal
+    surreal3 sql -e ws://localhost:9900 -p $cfg.user -u $cfg.pass
 }
 
 export def 'surrealdb up' [] {
