@@ -17,6 +17,23 @@ export def init [] {
     cargo run --bin init
 }
 
+export def 'surreal up' [] {
+    let cfg = open $CFG | get database.surreal
+    const data = path self data/surrealdb
+    $env.SURREAL_STORE = "rocksdb"
+    $env.SURREAL_ROCKSDB_BACKGROUND_FLUSH = "true"
+    mut args = [
+        start
+        -A
+        --no-banner
+        -b 0.0.0.0:9900
+        -u $cfg.user
+        -p $cfg.pass
+        $"rocksdb://($data)"
+    ]
+    surreal2 ...$args
+}
+
 export def 'surrealdb up' [] {
     let img = di | where name =~ surreal | get 0.name
     dcr surrealdb
@@ -25,7 +42,7 @@ export def 'surrealdb up' [] {
     mut args = [
         -d --name surrealdb
         -v $"($dd):/var/lib/surrealdb"
-        -p $"($cfg.port):8000"
+        -p $"($cfg.port):9900"
         -e $"SURREAL_EXPERIMENTAL_GRAPHQL=true"
         -e $"SURREAL_STORE=rocksdb"
         -e $"SURREAL_EXPERIMENTAL_GRAPHQL='true'"

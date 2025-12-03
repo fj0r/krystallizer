@@ -11,7 +11,7 @@ name = "qwen3-coder-480b-a35b-instruct"
 [model.qwen3.capabilities]
 
 [database.surreal]
-port = "8000"
+port = "9900"
 user = "admin"
 pass = "admin"
 
