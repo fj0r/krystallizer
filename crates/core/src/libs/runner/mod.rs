@@ -1,15 +1,3 @@
-#[cfg(feature = "koto")]
-use crate::script::run_koto;
-#[cfg(feature = "rune")]
-use crate::script::run_rune;
-#[cfg(feature = "steel")]
-use crate::script::run_steel;
-#[cfg(feature = "wasmer")]
-use crate::script::run_wasmer;
-#[cfg(feature = "wasmi")]
-use crate::script::run_wasmi;
-#[cfg(feature = "wasmtime")]
-use crate::script::run_wasmtime;
 use anyhow::{Context, Result};
 use config::Config;
 use db::DB;
@@ -21,30 +9,15 @@ use llm::{
 };
 use serde_json::json;
 use std::io::{self, Write};
+use vm::run_koto;
 
 pub async fn run() -> Result<()> {
     let config = Config::new()?;
     dbg!(&config);
 
-    #[cfg(feature = "wasmtime")]
-    run_wasmtime();
-
-    #[cfg(feature = "wasmi")]
-    run_wasmi();
-
-    #[cfg(feature = "rune")]
-    run_rune();
-
-    #[cfg(feature = "steel")]
-    run_steel();
-
-    #[cfg(feature = "koto")]
     if let Err(e) = run_koto("./scripts/hello.koto") {
         println!("{:#?}", e)
     }
-
-    #[cfg(feature = "wasmer")]
-    run_wasmer();
 
     let _db = DB::conn(&config.database.surreal).await?;
 

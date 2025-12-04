@@ -17,6 +17,9 @@ pub fn run(p: impl AsRef<Path>) -> Result<()> {
     });
 
     let _ = koto.compile_and_run(&script)?;
+
+    let result = koto.call_exported_function("my_fn", &[1.into(), 2.into()])?;
+    println!("koto:: {}", koto.value_to_string(result)?);
     Ok(())
 }
 

@@ -1,0 +1,22 @@
+[package]
+name = "vm"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+wasmtime = { workspace = true, optional = true }
+steel-core = { workspace = true, optional = true }
+koto = { workspace = true, optional = true }
+wasmi = { workspace = true, optional = true }
+wasmer = { workspace = true, optional = true }
+rune = { workspace = true, optional = true }
+anyhow = { workspace = true }
+
+[features]
+default = ["koto"]
+rune = ["dep:rune"]
+wasmtime = ["dep:wasmtime"]
+wasmer = ["dep:wasmer"]
+steel = ["dep:steel-core"]
+koto = ["dep:koto"]
+wasmi = ["dep:wasmi"]

@@ -1,3 +1,4 @@
 say_hello()
 say_hello 'Alice'
 print 'koto:: {plus 10, 20}'
+export my_fn = |a, b| '{a} + {b} is {a + b}'
