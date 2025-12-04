@@ -1,12 +1,16 @@
 use crate::config::Config;
 #[cfg(feature = "koto")]
-use crate::koto::run_koto;
+use crate::script::run_koto;
 #[cfg(feature = "rune")]
-use crate::script::run_script;
+use crate::script::run_rune;
 #[cfg(feature = "steel")]
-use crate::steel::run_steel;
+use crate::script::run_steel;
+#[cfg(feature = "wasmer")]
+use crate::script::run_wasmer;
+#[cfg(feature = "wasmi")]
+use crate::script::run_wasmi;
 #[cfg(feature = "wasmtime")]
-use crate::wasm::run_wasm;
+use crate::script::run_wasmtime;
 use anyhow::{Context, Result};
 use futures::StreamExt;
 use llm::{
@@ -22,16 +26,22 @@ pub async fn run() -> Result<()> {
     dbg!(&config);
 
     #[cfg(feature = "wasmtime")]
-    run_wasm();
+    run_wasmtime();
+
+    #[cfg(feature = "wasmi")]
+    run_wasmi();
 
     #[cfg(feature = "rune")]
-    run_script();
+    run_rune();
 
     #[cfg(feature = "steel")]
     run_steel();
 
     #[cfg(feature = "koto")]
     run_koto();
+
+    #[cfg(feature = "wasmer")]
+    run_wasmer();
 
     let db = &config.database.surreal.conn().await;
 

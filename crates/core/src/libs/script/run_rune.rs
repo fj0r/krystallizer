@@ -29,7 +29,7 @@ fn create_vm(paths: Vec<impl AsRef<Path>>) -> rune::support::Result<Vm> {
     Ok(vm)
 }
 
-pub fn run_script() -> rune::support::Result<()> {
+pub fn run() -> rune::support::Result<()> {
     let mut vm = create_vm(vec!["scripts/add.rn"])?;
     let output = vm.call(["add"], (10i64, 23i64))?;
     let output: i64 = rune::from_value(output)?;

@@ -1,7 +1,7 @@
 use anyhow::Result;
-use wasmtime::*;
+use wasmi::*;
 
-pub fn run_wasm() -> Result<()> {
+pub fn run() -> Result<()> {
     // Modules can be compiled through either the text or binary format
     let engine = Engine::default();
     let wat = r#"
@@ -31,7 +31,7 @@ pub fn run_wasm() -> Result<()> {
     // `Store` has a type parameter to store host-specific data, which in
     // this case we're using `4` for.
     let mut store = Store::new(&engine, 4);
-    let instance = linker.instantiate(&mut store, &module)?;
+    let instance = linker.instantiate_and_start(&mut store, &module)?;
     let hello = instance.get_typed_func::<(), ()>(&mut store, "hello")?;
 
     // And finally we can call the wasm!

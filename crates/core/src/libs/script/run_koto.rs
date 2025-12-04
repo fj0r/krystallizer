@@ -1,6 +1,6 @@
 use koto::prelude::*;
 
-pub fn run_koto() {
+pub fn run() {
     let mut koto = Koto::default();
     match koto.compile("1 + 2") {
         Ok(chunk) => match koto.run(chunk) {

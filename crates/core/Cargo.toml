@@ -22,12 +22,15 @@ wasmtime = { workspace = true, optional = true }
 steel-core = { workspace = true, optional = true }
 koto = { workspace = true, optional = true }
 wasmi = { workspace = true, optional = true }
+wasmer = { workspace = true, optional = true }
 
 [features]
 rune = ["dep:rune"]
 wasmtime = ["dep:wasmtime"]
+wasmer = ["dep:wasmer"]
 steel = ["dep:steel-core"]
 koto = ["dep:koto"]
+wasmi = ["dep:wasmi"]
 
 [lib]
 name = "core"
