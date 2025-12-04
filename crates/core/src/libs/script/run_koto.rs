@@ -1,11 +1,9 @@
-use koto::{Result, prelude::*, runtime};
+use anyhow::Result;
+use koto::{prelude::*, runtime};
+use std::{convert::AsRef, fs::read_to_string, path::Path};
 
-pub fn run() {
-    let script = "
-say_hello()
-say_hello 'Alice'
-print 'koto:: {plus 10, 20}'
-";
+pub fn run(p: impl AsRef<Path>) -> Result<()> {
+    let script = read_to_string(p)?;
     let mut koto = Koto::default();
     let prelude = koto.prelude();
 
@@ -18,7 +16,8 @@ print 'koto:: {plus 10, 20}'
         unexpected => unexpected_args("|Number, Number|", unexpected),
     });
 
-    let _ = koto.compile_and_run(script).unwrap();
+    let _ = koto.compile_and_run(&script)?;
+    Ok(())
 }
 
 fn say_hello(ctx: &mut CallContext) -> runtime::Result<KValue> {

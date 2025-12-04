@@ -39,7 +39,9 @@ pub async fn run() -> Result<()> {
     run_steel();
 
     #[cfg(feature = "koto")]
-    run_koto();
+    if let Err(e) = run_koto("./scripts/hello.koto") {
+        println!("{:#?}", e)
+    }
 
     #[cfg(feature = "wasmer")]
     run_wasmer();
