@@ -21,6 +21,7 @@ minijinja = { workspace = true }
 wasmtime = { workspace = true, optional = true }
 steel-core = { workspace = true, optional = true }
 koto = { workspace = true, optional = true }
+wasmi = { workspace = true, optional = true }
 
 [features]
 rune = ["dep:rune"]

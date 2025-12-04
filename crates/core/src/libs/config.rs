@@ -98,9 +98,9 @@ pub struct SurrealConfig {
     #[serde(default = "const_localhost")]
     pub host: String,
     pub port: String,
-    #[serde(default = "const_default")]
-    pub ns: String,
     #[serde(default = "const_public")]
+    pub ns: String,
+    #[serde(default = "const_default")]
     pub db: String,
     pub user: String,
     pub pass: String,
