@@ -1,4 +1,3 @@
-use crate::config::Config;
 #[cfg(feature = "koto")]
 use crate::script::run_koto;
 #[cfg(feature = "rune")]
@@ -12,6 +11,8 @@ use crate::script::run_wasmi;
 #[cfg(feature = "wasmtime")]
 use crate::script::run_wasmtime;
 use anyhow::{Context, Result};
+use config::Config;
+use db::DB;
 use futures::StreamExt;
 use llm::{
     FunctionCall, ToolCall,
@@ -43,7 +44,7 @@ pub async fn run() -> Result<()> {
     #[cfg(feature = "wasmer")]
     run_wasmer();
 
-    let db = &config.database.surreal.conn().await;
+    let _db = DB::conn(&config.database.surreal).await?;
 
     let model = config.get_model("qwen3").context("model does not exist")?;
 

@@ -5,17 +5,16 @@ edition = "2024"
 
 [dependencies]
 anyhow = { workspace = true }
-figment = { workspace = true }
 futures = { workspace = true }
-indexmap = { workspace = true }
 regex = { workspace = true }
 reqwest = { workspace = true }
-serde = { workspace = true }
+# serde = { workspace = true }
 serde_json = { workspace = true }
 tokio = { workspace = true }
 llm = { workspace = true, features = ["agent", "anthropic", "api", "google", "logging", "ollama", "openai"] }
 rmcp = { workspace = true }
-surrealdb = { workspace = true }
+db = { path = "../db" }
+config = { path = "../config" }
 rune = { workspace = true, optional = true }
 minijinja = { workspace = true }
 wasmtime = { workspace = true, optional = true }
