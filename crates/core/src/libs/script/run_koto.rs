@@ -1,19 +1,32 @@
-use koto::prelude::*;
+use koto::{Result, prelude::*, runtime};
 
 pub fn run() {
+    let script = "
+say_hello()
+say_hello 'Alice'
+print 'koto:: {plus 10, 20}'
+";
     let mut koto = Koto::default();
-    match koto.compile("1 + 2") {
-        Ok(chunk) => match koto.run(chunk) {
-            Ok(result) => match result {
-                KValue::Number(n) => println!("{n}"), // 3.0
-                other => panic!("Unexpected result type: {}", other.type_as_string()),
-            },
-            Err(runtime_error) => {
-                panic!("Runtime error: {runtime_error}");
-            }
-        },
-        Err(compiler_error) => {
-            panic!("Compiler error: {compiler_error}");
-        }
+    let prelude = koto.prelude();
+
+    // Standalone functions can be inserted directly
+    prelude.insert("say_hello", say_hello);
+
+    // The add_fn helper avoids the need for type annotations
+    prelude.add_fn("plus", |ctx| match ctx.args() {
+        [KValue::Number(a), KValue::Number(b)] => Ok((a + b).into()),
+        unexpected => unexpected_args("|Number, Number|", unexpected),
+    });
+
+    let _ = koto.compile_and_run(script).unwrap();
+}
+
+fn say_hello(ctx: &mut CallContext) -> runtime::Result<KValue> {
+    match ctx.args() {
+        [] => println!("koto:: Hello?"),
+        [KValue::Str(name)] => println!("koto:: Hello {name}"),
+        unexpected => return unexpected_args("||, or |String|", unexpected),
     }
+
+    Ok(KValue::Null)
 }

@@ -24,6 +24,7 @@ wasmi = { workspace = true, optional = true }
 wasmer = { workspace = true, optional = true }
 
 [features]
+default = ["koto"]
 rune = ["dep:rune"]
 wasmtime = ["dep:wasmtime"]
 wasmer = ["dep:wasmer"]
