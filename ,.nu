@@ -34,9 +34,27 @@ export def 'surreal up' [] {
     surreal3 ...$args
 }
 
-export def sql [] {
+def surreal_ [path] {
     let cfg = open $CFG | get database.surreal
-    surreal3 sql -e ws://localhost:9900 -p $cfg.user -u $cfg.pass
+    [
+        -u $"($cfg.user):($cfg.pass)"
+        -H $"surreal-ns: ($cfg.namespace? | default 'public')"
+        -H $"surreal-db: ($cfg.database? | default 'default')"
+        -H "Accept: application/json"
+        $"http://localhost:9900/($path)"
+    ]
+}
+
+export def query [] {
+    $in | curl -sL -X POST ...(surreal_ sql) --data-binary @- | from json
+}
+
+export def 'surrealdb import' [path] {
+    curl -sL -X POST ...(surreal_ import) --data-binary $"@($path)"
+}
+
+export def 'surrealdb export' [path] {
+    curl -X GET ...(surreal_ export) -o $path
 }
 
 export def 'surrealdb up' [] {

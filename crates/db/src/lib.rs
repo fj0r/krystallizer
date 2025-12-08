@@ -19,7 +19,6 @@ impl Deref for DB {
 impl DB {
     pub async fn conn(config: &SurrealConfig) -> Result<DB> {
         let db = connect(format!("ws://{}:{}", config.host, config.port)).await?;
-        dbg!(format!("ws://{}:{}", config.host, config.port));
         db.signin(Root {
             username: config.user.clone(),
             password: config.pass.clone(),
