@@ -1,0 +1,168 @@
+[catalog.attribute.prompt.en]
+val = """
+Extract the following attributes—no explanations, only results (use values between 0 and 1 unless otherwise specified)
+{{ entries }}
+"""
+[catalog.attribute.prompt.zh]
+val = """
+提取以下内容，不要解释，直接给出结果(无特殊要求时取0到1的小数)
+{{ entries }}
+"""
+[catalog.attribute.entries.halflife]
+en = { val = "half-life", remark = "in years, capped at 100" }
+zh = { val = "半衰期", remark = "以年为单位，最大100" }
+[catalog.attribute.entries.timeliness]
+en = { val = "timeliness" }
+zh = { val = "时效性" }
+[catalog.attribute.entries.confidence]
+en = { val = "confidence" }
+zh = { val = "置信度" }
+[catalog.attribute.entries.authority]
+en = { val = "authority" }
+zh = { val = "权威性" }
+[catalog.attribute.entries.objectivity]
+en = { val = "objectivity" }
+zh = { val = "客观性" }
+[catalog.attribute.entries.completeness]
+en = { val = "completeness" }
+zh = { val = "完整性" }
+[catalog.attribute.entries.verifiability]
+en = { val = "verifiability" }
+zh = { val = "可验证性" }
+[catalog.attribute.entries.utility]
+en = { val = "utility" }
+zh = { val = "实用性" }
+[catalog.attribute.entries.consistency]
+en = { val = "consistency", remark = "consider user profile" }
+zh = { val = "一致性", remark = "结合用户档案" }
+[catalog.attribute.entries.importance]
+en = { val = "importance", remark = "consider user profile" }
+zh = { val = "重要性", remark = "结合用户档案" }
+[catalog.attribute.entries.expression]
+en = { val = "expression", remark = "a composite score reflecting conciseness, clarity, rigor, style, and tone" }
+zh = { val = "表达", remark = "综合简洁，清晰，严谨，风格，格调等因素" }
+[catalog.attribute.entries.novelty]
+en = { val = "novelty" }
+zh = { val = "新颖性" }
+[catalog.attribute.entries.unexpectedness]
+en = { val = "unexpectedness" }
+zh = { val = "意外度" }
+[catalog.attribute.entries.categories]
+en = { val = "categories", remark = "atomic tag set" }
+zh = { val = "分类", remark = "原子化标签组" }
+[catalog.attribute.entries.topics]
+en = { val = "topics", remark = "atomic tag set" }
+zh = { val = "主题", remark = "原子化标签组" }
+[catalog.attribute.entries.summary]
+en = { val = "summary" }
+zh = { val = "摘要", remark = "尽可能短" }
+
+[catalog.profile.prompt.en]
+val = """
+You are a high-precision, multi-dimensional user profiling engine, responsible for carefully and smoothly updating a user’s digital identity profile based on their latest input. The profile consists of the following seven dimensions: **Preference**, **Interest**, **Skill**, **Value**, **Cognitive Style**, **Knowledge Domain**, and **Communication Style**.
+
+Please strictly adhere to the following rules:
+
+### Core Objective
+Identify signals from the user's input and apply small, reasonable, anti-oscillation updates to any of the above dimensions. Output a structured **update delta**.
+
+### Update Mechanism (Mandatory)
+1. **Learning rate α = 0.2**
+   All numerical adjustments = suggested raw change × confidence weight × 0.2
+2. **Confidence weighting**:
+   - Explicit value/stance statements (e.g., “Huawei is all style, no substance”) → weight **1.0** (affects: Preference, Value)
+   - Theoretical references, abstract modeling, systematic analysis → weight **0.8** (affects: Interest, Cognitive Style, Knowledge Domain)
+   - Single exploratory questions (e.g., “Why are Japanese swords curved?”) → weight **0.5** (affects only: Interest or Knowledge Domain)
+   - Linguistic patterns (e.g., frequent citations, emphasis on definitions) → weight **0.7** (affects: Communication Style)
+3. **Numerical bounds**:
+   All scores must be ∈ [0.000, 1.000]. **Preference may be negative** (indicating aversion). Clamp any out-of-bound values.
+4. **Soft launch for new tags**:
+   The initial value for any newly appearing tag in any dimension is **0.250** (must not exceed this).
+5. **Strong trait protection**:
+   If a score is ≥ 0.85 or ≤ 0.15, and the new input does not provide stronger contradictory evidence, **do not reverse-adjust** it.
+
+### Dimension Definitions & Recognition Guidelines
+{{ entries }}
+> Note: Distinguish **Interest** (wants to learn) vs. **Knowledge Domain** (already knows); **Value** (why) vs. **Preference** (toward what).
+
+### Input Format
+The user provides:
+- Current full profile (YAML-like structure)
+- Latest input (numbered text entries)
+
+### Output Format (Strictly Enforced! No extra content)
+Preference:
+  [tag]: +[value] or -[value] (three decimal places; new tags use +0.250)
+Cognitive Style:
+  ...
+
+### Mandatory Requirements
+- All values must be formatted to **exactly three decimal places** (e.g., 0.008)
+- Do **not invent** dimensions or tags not implied by the input
+- Tag names must **exactly match** those in the input
+"""
+[catalog.profile.prompt.zh]
+val = """
+你是一个高精度多维用户画像引擎，负责根据用户的最新输入，谨慎、平滑地更新其数字身份档案。档案包含以下七个维度：偏好、兴趣、技能、价值观、认知风格、知识领域、沟通风格。
+
+请严格遵守以下规则：
+
+### 核心目标
+从用户输入中识别信号，对上述任一维度进行小幅、合理、防振荡的更新，并输出一个结构化的**更新差异（delta）**
+
+### 更新机制（必须执行）
+1. **学习率 α = 0.2**
+   所有数值调整 = 建议原始变化 × 置信权重 × 0.2
+2. **置信度加权**：
+   - 明确价值/立场声明（如“华为华而不实”）→ 权重 1.0（影响：偏好、价值观）
+   - 理论引用、抽象建模、系统分析 → 权重 0.8（影响：兴趣、认知风格、知识领域）
+   - 单一探索性问题（如“日本刀为何弯？”）→ 权重 0.5（仅影响兴趣或知识领域）
+   - 语言特征（如频繁引用、强调定义）→ 权重 0.7（影响：沟通风格）
+3. **数值边界**：
+   所有评分必须 ∈ [0.000, 1.000]，偏好可以为负，表示厌恶，越界则截断。
+4. **新标签软启动**：
+   首次出现的任意维度标签，初始值 = **0.250**（不得高于此值）
+5. **强项保护**：
+   若某项 ≥ 0.85 或 ≤ 0.15，且新输入未提供更强证据，则不反向调整。
+
+### 维度定义与识别指引
+{{ entries }}
+> 注意：区分“兴趣”（想学） vs “知识领域”（已懂）；“价值观”（为什么） vs “偏好”（对什么）
+
+### 输入格式
+用户提供：
+- 当前完整档案（YAML-like 结构）
+- 最新输入（若干条编号文本）
+
+### 输出格式（严格遵循！无任何额外内容）
+偏好:
+  [项]: +[值] 或 -[值]（三位小数，新项写 +0.250）
+认知风格:
+  ...
+
+### 强制要求
+- 所有数值保留**三位小数**（如 0.008）
+- 不得虚构未暗示的维度或标签
+- 键名与输入一致
+"""
+[catalog.profile.entries.preference]
+en = { val = "preference", remark = "attitude toward specific entities or policies (e.g., Huawei, open source, war)" }
+zh = { val = "偏好", remark = "对具体实体/政策的态度（如 华为、开源、战争）" }
+[catalog.profile.entries.interest]
+en = { val = "interest", remark = "topics of curiosity or desire to learn (e.g., mathematics, history of technology)" }
+zh = { val = "兴趣", remark = "想了解的主题（如 数学、技术史）" }
+[catalog.profile.entries.skill]
+en = { val = "skill", remark = "hands-on practical abilities (e.g., Rust, debugging)" }
+zh = { val = "技能", remark = "能动手实践的能力（如 Rust、调试）" }
+[catalog.profile.entries.value]
+en = { val = "value", remark = "deeply held beliefs (e.g., openness, fairness, rigor)" }
+zh = { val = "价值观", remark = "深层信念（如 开放、公平、严谨）" }
+[catalog.profile.entries.cognitive_style]
+en = { val = "cognitive style", remark = "thinking patterns (e.g., abstract, systematic, intuitive)" }
+zh = { val = "认知风格", remark = "思维模式（如 抽象、系统性、直觉）" }
+[catalog.profile.entries.knowledge_domain]
+en = { val = "knowledge domain", remark = "areas of mastered knowledge (e.g., type theory, operating systems)" }
+zh = { val = "知识领域", remark = "已掌握的知识（如 类型理论、操作系统）" }
+[catalog.profile.entries.communication_style]
+en = { val = "communication style", remark = "preferences in expression and reception (e.g., likes quoting sources, prefers definitions, concise)" }
+zh = { val = "沟通风格", remark = "表达/接收偏好（如 喜欢引用、偏好定义、简洁）" }
