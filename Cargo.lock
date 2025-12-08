@@ -872,6 +872,9 @@ dependencies = [
  "config",
  "core",
  "db",
+ "serde",
+ "serde_json",
+ "surrealdb",
  "tokio",
 ]
 

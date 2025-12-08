@@ -11,8 +11,8 @@ async fn main() -> Result<()> {
     for entry in read_dir(config.database.surreal.migration.path)? {
         let path = entry?.path();
         let content = read_to_string(path)?;
-        let r = db.query(content);
-        println!("{:?}", r);
+        let r = db.query(content).await?;
+        println!("{:#?}", r.results);
     }
 
     Ok(())
