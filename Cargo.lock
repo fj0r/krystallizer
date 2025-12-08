@@ -724,6 +724,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "catalog_macro"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.111",
+]
+
+[[package]]
 name = "cc"
 version = "1.2.48"
 source = "registry+https://github.com/rust-lang/crates.io-index"

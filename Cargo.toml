@@ -1,11 +1,14 @@
 [workspace]
-members = [
+members = ["crates/catalog_macro",
   "crates/cli", "crates/config",
   "crates/core", "crates/db", "crates/vm",
 ]
 resolver = "2"
 
 [workspace.dependencies]
+proc-macro2 = { version = "1.0.103", features = ["span-locations"] }
+quote = "1.0.42"
+syn = { version = "2.0.111", features = ["extra-traits", "full"] }
 anyhow = "1.0.100"
 figment = { version = "0.10.19", features = ["toml", "env"] }
 futures = "0.3.31"
