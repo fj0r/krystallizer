@@ -1,7 +1,11 @@
 [workspace]
-members = ["crates/catalog_macro",
-  "crates/cli", "crates/config",
-  "crates/core", "crates/db", "crates/vm",
+members = [
+  "crates/macro",
+  "crates/cli",
+  "crates/config",
+  "crates/core",
+  "crates/db",
+  "crates/vm",
 ]
 resolver = "2"
 
