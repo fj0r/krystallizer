@@ -9,6 +9,12 @@ members = [
 ]
 resolver = "2"
 
+[profile.dev]
+opt-level = 0
+
+[profile.dev.package."*"]
+opt-level = 3
+
 [workspace.dependencies]
 proc-macro2 = { version = "1.0.103", features = ["span-locations"] }
 quote = "1.0.42"
