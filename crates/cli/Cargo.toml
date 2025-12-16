@@ -4,14 +4,14 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-tokio.workspace = true
 anyhow.workspace = true
-surrealdb.workspace = true
-serde_json.workspace = true
-serde.workspace = true
+config = { workspace = true } #unified
 core.path = "../core"
-db.path = "../db"
-config.path = "../config"
+db = { workspace = true } #unified
+serde.workspace = true
+serde_json.workspace = true
+surrealdb.workspace = true
+tokio.workspace = true
 
 [[bin]]
 name = "krystallizer"

@@ -5,5 +5,5 @@ edition = "2024"
 
 [dependencies]
 anyhow.workspace = true
+config = { workspace = true } #unified
 surrealdb.workspace = true
-config.path = "../config"

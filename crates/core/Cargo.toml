@@ -5,16 +5,16 @@ edition = "2024"
 
 [dependencies]
 anyhow.workspace = true
+config = { workspace = true } #unified
+db = { workspace = true } #unified
 futures.workspace = true
+llm = { workspace = true, features = ["agent", "anthropic", "api", "google", "logging", "ollama", "openai"] }
+minijinja.workspace = true
 regex.workspace = true
 reqwest.workspace = true
+rmcp.workspace = true
 serde_json.workspace = true
 tokio.workspace = true
-llm = { workspace = true, features = ["agent", "anthropic", "api", "google", "logging", "ollama", "openai"] }
-rmcp.workspace = true
-db.path = "../db"
-config.path = "../config"
-minijinja.workspace = true
 vm.path = "../vm"
 
 [lib]
