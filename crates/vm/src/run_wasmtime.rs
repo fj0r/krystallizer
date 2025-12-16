@@ -3,7 +3,10 @@ use wasmtime::*;
 
 pub fn run() -> Result<()> {
     // Modules can be compiled through either the text or binary format
-    let engine = Engine::default();
+    let mut config = Config::new();
+    config.wasm_component_model(true);
+    config.cache(Some(Cache::from_file(None)?));
+    let engine = Engine::new(&config)?;
     let wat = r#"
         (module
             (import "host" "host_func" (func $host_hello (param i32)))
@@ -29,8 +32,8 @@ pub fn run() -> Result<()> {
 
     // All wasm objects operate within the context of a "store". Each
     // `Store` has a type parameter to store host-specific data, which in
-    // this case we're using `4` for.
-    let mut store = Store::new(&engine, 4);
+    // this case we're using `16` for 1M (64K * 16).
+    let mut store = Store::new(&engine, 16);
     let instance = linker.instantiate(&mut store, &module)?;
     let hello = instance.get_typed_func::<(), ()>(&mut store, "hello")?;
 

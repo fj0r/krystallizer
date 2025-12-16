@@ -13,7 +13,7 @@ rune = { workspace = true, optional = true }
 anyhow.workspace = true
 
 [features]
-default = ["koto"]
+default = ["koto", "wasmtime"]
 rune = ["dep:rune"]
 wasmtime = ["dep:wasmtime"]
 wasmer = ["dep:wasmer"]

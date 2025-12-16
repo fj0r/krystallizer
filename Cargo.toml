@@ -41,6 +41,7 @@ koto = { version = "0.16.0" }
 [workspace.dependencies.wasmtime]
 version = "39.0.1"
 default-features = false
+_features = ["runtime"]
 features = [
   "async",
   "cache",
