@@ -27,6 +27,8 @@ pub fn example(input: TokenStream) -> TokenStream {
         bail!("must provide file");
     };
 
-    println!("cargo:rerun-if-changed={}", file);
-    quote! {}.into()
+    quote! {
+        const _: &[u8] = include_bytes!(#file);
+    }
+    .into()
 }
