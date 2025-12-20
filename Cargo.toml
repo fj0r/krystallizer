@@ -28,20 +28,20 @@ minijinja = { version = "2.14.0", features = ["loader"] }
 proc-macro2 = { version = "1.0.103", features = ["span-locations"] }
 quote = "1.0.42"
 regex = "1.12.2"
-reqwest = { version = "0.12.26", features = ["json"] }
-rmcp = "0.11.0"
+reqwest = { version = "0.12.28", features = ["json"] }
+rmcp = "0.12.0"
 rune = { version = "0.14.1", features = ["emit", "std", "tokio"] }
 serde = "1.0.228"
-serde_json = "1.0.145"
+serde_json = "1.0.147"
 steel-core = { version = "0.7.0" }
 surrealdb = { version = "3.0.0-beta.1" }
 syn = { version = "2.0.111", features = ["extra-traits", "full"] }
 tokio = "1.48.0"
 wasmer = "6.1.0"
-wasmi = "1.0.4"
+wasmi = "1.0.6"
 
 [workspace.dependencies.wasmtime]
-version = "39.0.1"
+version = "40.0.0"
 default-features = false
 _features = ["runtime"]
 features = [
