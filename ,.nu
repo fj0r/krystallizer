@@ -76,3 +76,10 @@ export def 'surrealdb up' [] {
     ]
     ^$env.CNTRCTL run ...$args
 }
+
+export module test {
+    export def preprocess [] {
+        let cfg = open $CFG
+        $cfg.
+    }
+}
