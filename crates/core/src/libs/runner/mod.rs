@@ -58,13 +58,17 @@ pub async fn run() -> Result<()> {
                         }
                     },
                     "required": ["keyword"]
-                }))
+                })),
         )
         .build()
         .expect("Failed to build LLM (OpenAI)");
 
     // Prepare conversation history with example messages
-    let messages = vec![ChatMessage::user().content("明天下雨不？").build()];
+    let messages = vec![
+        ChatMessage::user()
+            .content("这个项目安装了哪些依赖")
+            .build(),
+    ];
 
     // let response = llm.chat_with_tools(&messages, llm.tools()).await?;
 
