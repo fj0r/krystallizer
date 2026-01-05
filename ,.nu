@@ -66,7 +66,6 @@ export def 'surrealdb up' [] {
         -d --name surrealdb
         -v $"($dd):/var/lib/surrealdb"
         -p $"($cfg.port):9900"
-        -e $"SURREAL_EXPERIMENTAL_GRAPHQL=true"
         -e $"SURREAL_STORE=rocksdb"
         -e $"SURREAL_EXPERIMENTAL_GRAPHQL='true'"
         -e $"SURREAL_ROCKSDB_BACKGROUND_FLUSH='true'"
