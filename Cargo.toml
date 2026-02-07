@@ -16,7 +16,7 @@ opt-level = 0
 opt-level = 3
 
 [workspace.dependencies]
-anyhow = "1.0.100"
+anyhow = "1.0.101"
 config = { path = "crates/config", version = "^0.1.0" } #unified
 db = { path = "crates/db", version = "^0.1.0" } #unified
 figment = { version = "0.10.19", features = ["toml", "env"] }
@@ -24,24 +24,24 @@ futures = "0.3.31"
 indexmap = { version = "2.13.0", features = ["serde"] }
 koto = { version = "0.16.1" }
 llm = { version = "1.3.7" }
-minijinja = { version = "2.14.0", features = ["loader"] }
+minijinja = { version = "2.15.1", features = ["loader"] }
 proc-macro2 = { version = "1.0.106", features = ["span-locations"] }
 quote = "1.0.44"
-regex = "1.12.2"
-reqwest = { version = "0.13.1", features = ["json"] }
+regex = "1.12.3"
+reqwest = { version = "0.13.2", features = ["json"] }
 rmcp = "0.14.0"
 rune = { version = "0.14.1", features = ["emit", "std", "tokio"] }
 serde = "1.0.228"
 serde_json = "1.0.149"
 steel-core = { version = "0.7.0" }
-surrealdb = { version = "3.0.0-beta.2" }
+surrealdb = { version = "3.0.0-beta.3" }
 syn = { version = "2.0.114", features = ["extra-traits", "full"] }
 tokio = "1.49.0"
-wasmer = "6.1.0"
-wasmi = "1.0.7"
+wasmer = "7.0.1"
+wasmi = "1.0.8"
 
 [workspace.dependencies.wasmtime]
-version = "41.0.0"
+version = "41.0.3"
 default-features = false
 _features = ["runtime"]
 features = [
