@@ -21,27 +21,27 @@ config = { path = "crates/config", version = "^0.1.0" } #unified
 db = { path = "crates/db", version = "^0.1.0" } #unified
 figment = { version = "0.10.19", features = ["toml", "env"] }
 futures = "0.3.32"
-indexmap = { version = "2.13.0", features = ["serde"] }
+indexmap = { version = "2.13.1", features = ["serde"] }
 koto = { version = "0.16.1" }
 llm = { version = "1.3.7" }
-minijinja = { version = "2.17.1", features = ["loader"] }
+minijinja = { version = "2.19.0", features = ["loader"] }
 proc-macro2 = { version = "1.0.106", features = ["span-locations"] }
 quote = "1.0.45"
 regex = "1.12.3"
 reqwest = { version = "0.13.2", features = ["json"] }
-rmcp = "1.2.0"
+rmcp = "1.3.0"
 rune = { version = "0.14.1", features = ["emit", "std", "tokio"] }
 serde = "1.0.228"
 serde_json = "1.0.149"
 steel-core = { version = "0.8.2" }
-surrealdb = { version = "3.0.4" }
+surrealdb = { version = "3.0.5" }
 syn = { version = "2.0.117", features = ["extra-traits", "full"] }
-tokio = "1.50.0"
-wasmer = "7.0.1"
+tokio = "1.51.0"
+wasmer = "7.1.0"
 wasmi = "1.0.9"
 
 [workspace.dependencies.wasmtime]
-version = "42.0.1"
+version = "43.0.0"
 default-features = false
 _features = ["runtime"]
 features = [

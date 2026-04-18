@@ -12,7 +12,7 @@ async fn main() -> Result<()> {
         let path = entry?.path();
         let content = read_to_string(path)?;
         let r = db.query(content).await?;
-        println!("{:#?}", r.results);
+        println!("{:#?}", r);
     }
 
     Ok(())
